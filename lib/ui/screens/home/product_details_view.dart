@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
 import 'package:e_commerece_clon/ui/provider/card_item_provider.dart';
 import 'package:e_commerece_clon/ui/provider/product_like.dart';
@@ -112,6 +114,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                           name: widget.productName,
                           description: widget.productDesc,
                           price: widget.amount,
+                          id: generateRandomId(),
                           //  price: double.parse(widget.amount.toString()),
                           quantity: 1));
                     },
@@ -120,6 +123,10 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         ),
       ),
     );
+  }
+
+  String generateRandomId() {
+    return Random().nextInt(1000000).toString();
   }
 
   selectColor() {
