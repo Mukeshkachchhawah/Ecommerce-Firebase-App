@@ -1,7 +1,10 @@
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
+import 'package:e_commerece_clon/ui/provider/card_item_provider.dart';
+import 'package:e_commerece_clon/ui/provider/product_like.dart';
 import 'package:e_commerece_clon/ui/screens/shoping/shaping_view.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../modal/category_modal.dart';
 
@@ -9,7 +12,7 @@ class ProductDetailsView extends StatefulWidget {
   final String imagePath;
   final String productName;
   final String productDesc;
-  final String amount;
+  final double amount;
 
   ProductDetailsView(
       {super.key,
@@ -27,6 +30,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
+/*     var mData = context.watch<CartProvider>().addToCart(CartItemModal(
+        name: "name", description: "description", price: 12325, quantity: 1)); */
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -60,6 +66,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
+                        //  "dfjsd ljfsdlkfjlkj",
                         widget.productName,
                         style: textStyleFonts16(context),
                       ),
@@ -100,7 +107,14 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 height: 50,
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () => _addToCartAndNavigate(context),
+                    onPressed: () {
+                      context.read<CartProvider>().addToCart(CartItemModal(
+                          name: widget.productName,
+                          description: widget.productDesc,
+                          price: widget.amount,
+                          //  price: double.parse(widget.amount.toString()),
+                          quantity: 1));
+                    },
                     child: Text("Add To Cart")))
           ],
         ),
@@ -136,25 +150,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  void _addToCartAndNavigate(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ShapingView(
-          initialItems: [
-            CartItemModal(
-              name: widget.productName,
-              description: widget.productDesc,
-              // price: int.parse(widget.amount),
-              price: double.parse(widget.amount.replaceAll(',', '.')),
-              quantity: 1,
-            )
-          ],
-        ),
       ),
     );
   }

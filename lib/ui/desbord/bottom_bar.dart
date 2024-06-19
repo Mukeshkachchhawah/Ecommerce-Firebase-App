@@ -20,7 +20,7 @@ class _BottomBarViewState extends State<BottomBarView> {
     final pages = [
       const HomePageView(),
       const FavoriteProductsView(),
-      const NotificationView(),
+      const ShapingView(),
       const UserProfileView()
     ];
     return Scaffold(
@@ -30,10 +30,10 @@ class _BottomBarViewState extends State<BottomBarView> {
           //  showSelectedLabels: false,
           backgroundColor: Colors.white,
           currentIndex: _myIndex,
-          selectedItemColor: Color(0xffaa14f0),
+          selectedItemColor: const Color(0xffaa14f0),
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          unselectedIconTheme: IconThemeData(color: Color(0xffa8a7a6)),
+          unselectedIconTheme: const IconThemeData(color: Color(0xffa8a7a6)),
           onTap: (index) {
             setState(() {
               _myIndex = index;

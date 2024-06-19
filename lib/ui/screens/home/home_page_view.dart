@@ -284,11 +284,12 @@ class _HomePageViewState extends State<HomePageView> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductDetailsView(
-                          imagePath: itemData['image'],
-                          productName: itemData['name'],
-                          productDesc: itemData['description'],
-                          amount: itemData['amount'],
-                        ),
+                            imagePath: itemData['image'],
+                            productName: itemData['name'],
+                            productDesc: itemData['description'],
+                            //  amount: itemData['amount'],
+                            amount:
+                                double.parse(itemData['amount'].toString())),
                       ),
                     );
                   },
