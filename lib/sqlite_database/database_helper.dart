@@ -35,7 +35,7 @@ class DatabaseHelper {
 
     return await openDatabase(
       path,
-      version: 1, // Set the database version
+      version: 2, // Set the database version
       onCreate: _onCreate, // Set the callback for creating the database.
     );
   }
@@ -51,7 +51,8 @@ class DatabaseHelper {
         name TEXT,
         description TEXT,
         price REAL,
-        quantity INTEGER
+        quantity INTEGER,
+        imgPath TEXT
       )
     ''');
 

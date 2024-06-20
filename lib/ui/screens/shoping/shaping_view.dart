@@ -1,4 +1,4 @@
-import 'package:e_commerece_clon/ui/provider/card_item_provider.dart';
+import 'package:e_commerece_clon/provider/card_item_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
@@ -32,10 +32,11 @@ class ShapingView extends StatelessWidget {
                   return CartItemWidget(item: item, index: index);
                 },
               ),
+              
+              
               Card(
                 child: SizedBox(
-                  height: 250,
-                  width: 400,
+                  height: 240,
                   child: Column(
                     children: [
                       ListTile(
@@ -73,6 +74,7 @@ class ShapingView extends StatelessWidget {
                       ),
                       const Divider(),
                       ListTile(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
                         leading: Text(
                           "Total:",
                           style: textStyleFonts14(context,
@@ -190,9 +192,11 @@ class CartItemWidget extends StatelessWidget {
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                          image: NetworkImage(item.imgPath ?? ''),
+                          fit: BoxFit.cover)),
                 ),
               ],
             ),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerece_clon/compont/drawer.dart';
-import 'package:e_commerece_clon/ui/provider/product_like.dart';
+import 'package:e_commerece_clon/provider/product_like.dart';
 import 'package:e_commerece_clon/modal/category_modal.dart';
 import 'package:e_commerece_clon/ui/screens/home/category_view.dart';
 import 'package:e_commerece_clon/ui/screens/home/product_details_view.dart';

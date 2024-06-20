@@ -1,6 +1,6 @@
 import 'package:e_commerece_clon/ui/desbord/splash_view.dart';
-import 'package:e_commerece_clon/ui/provider/card_item_provider.dart';
-import 'package:e_commerece_clon/ui/provider/product_like.dart';
+import 'package:e_commerece_clon/provider/card_item_provider.dart';
+import 'package:e_commerece_clon/provider/product_like.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';

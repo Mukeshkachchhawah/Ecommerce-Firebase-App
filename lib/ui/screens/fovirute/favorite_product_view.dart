@@ -1,4 +1,4 @@
-import 'package:e_commerece_clon/ui/provider/product_like.dart';
+import 'package:e_commerece_clon/provider/product_like.dart';
 import 'package:e_commerece_clon/ui/screens/home/product_details_view.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +55,7 @@ class _FavoriteProductsViewState extends State<FavoriteProductsView> {
                         imagePath: product['image'],
                         productName: product['name'],
                         productDesc: product['description'],
-                        amount: product['amount'],
+                        amount: double.parse(product['amount'].toString()),
                       ),
                     ),
                   );
