@@ -1,5 +1,6 @@
 import 'package:e_commerece_clon/provider/card_item_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
@@ -19,73 +20,108 @@ class ShapingView extends StatelessWidget {
           style: textStyleFonts16(context),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<CartProvider>(
-          builder: (context, cartProvider, _) => Stack(
+      body: Consumer<CartProvider>(
+        builder: (context, cartProvider, _) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Stack(
             alignment: AlignmentDirectional.bottomCenter,
             children: [
               ListView.builder(
                 itemCount: cartProvider.cartItems.length,
                 itemBuilder: (context, index) {
                   final item = cartProvider.cartItems[index];
-                  return CartItemWidget(item: item, index: index);
+                  return Slidable(
+                      endActionPane:
+                          ActionPane(motion: ScrollMotion(), children: [
+                        SlidableAction(
+                          onPressed: (context) {
+                            context.read<CartProvider>().removeFromCart(item);
+                          },
+                          icon: Icons.delete,
+                          label: 'Delete',
+                        ),
+                        SlidableAction(
+                          onPressed: (context) {},
+                          icon: Icons.share,
+                          label: 'Share',
+                        )
+                      ]),
+                      child: CartItemWidget(item: item, index: index));
+
+                  //   CartItemWidget(item: item, index: index);
                 },
               ),
-              
-              
               Card(
                 child: SizedBox(
-                  height: 240,
-                  child: Column(
-                    children: [
-                      ListTile(
-                        leading: Text(
-                          "Selected Items:",
-                          style: textStyleFonts14(context,
-                              colors: const Color(0xff9a9998)),
+                  height: MediaQuery.of(context).size.height * 0.26,
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Seletecd Items: ",
+                              style: textStyleFonts14(context,
+                                  colors: const Color(0xff9a9998)),
+                            ),
+                            Text(
+                              "${cartProvider.cartItems.length}",
+                              style: textStyleFonts16(context),
+                            ),
+                          ],
                         ),
-                        trailing: Text(
-                          "${cartProvider.cartItems.length}",
-                          style: textStyleFonts16(context),
+                        hSpace(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Subtotal:",
+                              style: textStyleFonts14(context,
+                                  colors: const Color(0xff9a9998)),
+                            ),
+                            Text(
+                              "\$${cartProvider.subtotal.toStringAsFixed(2)}",
+                              style: textStyleFonts16(context),
+                            ),
+                          ],
                         ),
-                      ),
-                      ListTile(
-                        leading: Text(
-                          "Subtotal:",
-                          style: textStyleFonts14(context,
-                              colors: const Color(0xff9a9998)),
+                        hSpace(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Discount (20%):",
+                              style: textStyleFonts14(context,
+                                  colors: const Color(0xff9a9998)),
+                            ),
+                            Text(
+                              "\$${cartProvider.discount.toStringAsFixed(2)}",
+                              style: textStyleFonts16(context),
+                            ),
+                          ],
                         ),
-                        trailing: Text(
-                          "\$${cartProvider.subtotal.toStringAsFixed(2)}",
-                          style: textStyleFonts16(context),
+                        const Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Total:",
+                              style: textStyleFonts14(context,
+                                  colors: const Color(0xff9a9998)),
+                            ),
+                            Text(
+                              "\$${cartProvider.total.toStringAsFixed(2)}",
+                              style: textStyleFonts20(context),
+                            ),
+                          ],
                         ),
-                      ),
-                      ListTile(
-                        leading: Text(
-                          "Discount (20%):",
-                          style: textStyleFonts14(context,
-                              colors: const Color(0xff9a9998)),
-                        ),
-                        trailing: Text(
-                          "\$${cartProvider.discount.toStringAsFixed(2)}",
-                          style: textStyleFonts16(context),
-                        ),
-                      ),
-                      const Divider(),
-                      ListTile(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                        leading: Text(
-                          "Total:",
-                          style: textStyleFonts14(context,
-                              colors: const Color(0xff9a9998)),
-                        ),
-                        trailing: Text(
-                          "\$${cartProvider.total.toStringAsFixed(2)}",
-                          style: textStyleFonts28(context),
-                        ),
-                      ),
-                    ],
+                        hSpace(),
+                        OutlinedButton(
+                            onPressed: () {}, child: Text("Add To CART"))
+                      ],
+                    ),
                   ),
                 ),
               ),
