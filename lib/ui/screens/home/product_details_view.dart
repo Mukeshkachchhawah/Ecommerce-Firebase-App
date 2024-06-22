@@ -27,6 +27,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   bool isSelectedCard = false;
 
   @override
+  void initState() {
+    super.initState();
+    isSelectedCard = context.read<CartProvider>().isInCart(generateProductId());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -40,11 +40,9 @@ class CartProvider extends ChangeNotifier {
   void decrementQuantity(int index) {
     if (_cartItems[index].quantity > 1) {
       _cartItems[index].quantity--;
-    }
-    /* else {
+    } else {
       _cartItems.removeAt(index);
-    } */
-    /// -1 decrement quantity
+    }
     notifyListeners();
   }
 }

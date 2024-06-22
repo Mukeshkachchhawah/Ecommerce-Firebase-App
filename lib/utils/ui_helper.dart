@@ -22,6 +22,15 @@ TextStyle textStyleFonts11(BuildContext context, {colors = Colors.black}) {
 }
 
 /// Custom fonts custom button fonts size forget password
+TextStyle textStyleFonts12(BuildContext context, {colors = Colors.black}) {
+  return Theme.of(context).textTheme.labelLarge!.copyWith(
+        color: colors,
+        fontWeight: FontWeight.w500,
+        fontSize: 12,
+      );
+}
+
+/// Custom fonts custom button fonts size forget password
 TextStyle textStyleFonts14(BuildContext context, {colors = Colors.black}) {
   return Theme.of(context).textTheme.labelLarge!.copyWith(
         color: colors,

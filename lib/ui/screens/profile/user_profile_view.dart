@@ -30,22 +30,34 @@ class _UserProfileViewState extends State<UserProfileView> {
                     radius: 50,
                   ),
                   wSpace(),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Mukesh Kachhawaha",
-                        style: textStyleFonts16(context,
-                            colors: const Color(0xffffffff)),
-                      ),
-                      hSpace(),
-                      Text(
-                        "mukeshkachhawah49@gmail.com",
-                        style: textStyleFonts14(context,
-                            colors: const Color(0xffffffff)),
-                      )
-                    ],
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Name : Mukesh Kachhawaha",
+                          style: textStyleFonts16(context,
+                              colors: const Color(0xffffffff)),
+                          maxLines: 1,
+                        ),
+                        hSpace(),
+                        Text(
+                          "Email : mukeshkachhawah49@gmail.com",
+                          style: textStyleFonts12(
+                            context,
+                            colors: const Color(0xffffffff),
+                          ),
+                          maxLines: 1,
+                        ),
+                        hSpace(),
+                        Text(
+                          "Phone : 7296826128",
+                          style: textStyleFonts12(context,
+                              colors: const Color(0xffffffff)),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),

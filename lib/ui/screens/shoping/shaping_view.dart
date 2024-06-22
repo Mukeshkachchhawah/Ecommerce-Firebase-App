@@ -1,4 +1,3 @@
-
 import 'package:e_commerece_clon/provider/card_item_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
