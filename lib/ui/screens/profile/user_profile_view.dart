@@ -19,26 +19,36 @@ class _UserProfileViewState extends State<UserProfileView> {
       body: Column(
         children: [
           Container(
-            height: 250,
+            height: 150,
             width: double.infinity,
             color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                ),
-                hSpace(),
-                Text(
-                  "Name",
-                  style: textStyleFonts16(context, colors: const Color(0xffffffff)),
-                ),
-                hSpace(),
-                Text(
-                  "sdjfhdsjhf@gmail.com",
-                  style: textStyleFonts16(context, colors: const Color(0xffffffff)),
-                )
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 50,
+                  ),
+                  wSpace(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Mukesh Kachhawaha",
+                        style: textStyleFonts16(context,
+                            colors: const Color(0xffffffff)),
+                      ),
+                      hSpace(),
+                      Text(
+                        "mukeshkachhawah49@gmail.com",
+                        style: textStyleFonts14(context,
+                            colors: const Color(0xffffffff)),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
           hSpace(),

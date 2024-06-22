@@ -1,14 +1,9 @@
-import 'dart:math';
-
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
+import 'package:e_commerece_clon/modal/category_modal.dart';
 import 'package:e_commerece_clon/provider/card_item_provider.dart';
-import 'package:e_commerece_clon/provider/product_like.dart';
-import 'package:e_commerece_clon/ui/screens/shoping/shaping_view.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../modal/category_modal.dart';
 
 class ProductDetailsView extends StatefulWidget {
   final String imagePath;
@@ -16,7 +11,7 @@ class ProductDetailsView extends StatefulWidget {
   final String productDesc;
   final double amount;
 
-  ProductDetailsView(
+  const ProductDetailsView(
       {super.key,
       required this.imagePath,
       required this.productName,
@@ -29,12 +24,10 @@ class ProductDetailsView extends StatefulWidget {
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
   Color selectedColor = Colors.black;
+  bool isSelectedCard = false;
 
   @override
   Widget build(BuildContext context) {
-/*     var mData = context.watch<CartProvider>().addToCart(CartItemModal(
-        name: "name", description: "description", price: 12325, quantity: 1)); */
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -47,7 +40,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,8 +49,11 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 width: double.infinity,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
-                      selectedColor.withOpacity(0.5), BlendMode.srcATop),
-                  child: Image.network(widget.imagePath),
+                      selectedColor.withOpacity(0.1), BlendMode.plus),
+                  child: Image.network(
+                    widget.imagePath,
+                    fit: BoxFit.fill,
+                  ),
                 )),
             hSpace(mHeight: 20),
             Row(
@@ -68,7 +64,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        //  "dfjsd ljfsdlkfjlkj",
                         widget.productName,
                         style: textStyleFonts16(context),
                       ),
@@ -102,7 +97,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               style: textStyleFonts16(context),
             ),
             hSpace(),
-            Text(
+            const Text(
                 "kjdf kshfksd hfkdsfk djfk  dsjflkjfj dlskf jsdfdsf jdslfjldsjf dlsfj dlsfj dsdkf jldkfjldsfjldsjf lsdfj dlsjflf jlsdjf sdfjsdlfjdsljflsdjfldsfjsdlfjsdfj dslkfldskfjsldkf sdjfldskf jldjfldsjf lds fj dlsfjldsfj l"),
             hSpace(mHeight: 20),
             SizedBox(
@@ -110,24 +105,49 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      context.read<CartProvider>().addToCart(CartItemModal(
-                          name: widget.productName,
-                          description: widget.productDesc,
-                          price: widget.amount,
-                          imgPath: widget.imagePath,
-                          id: generateRandomId(),
-                          //  price: double.parse(widget.amount.toString()),
-                          quantity: 1));
+                      setState(() {
+                        if (isSelectedCard) {
+                          context.read<CartProvider>().removeFromCart(
+                              CartItemModal(
+                                  id: generateProductId(),
+                                  name: widget.productName,
+                                  description: widget.productDesc,
+                                  price: widget.amount,
+                                  imgPath: widget.imagePath,
+                                  quantity: 1));
+                          isSelectedCard = false;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Item removed from cart"),
+                            ),
+                          );
+                        } else {
+                          context.read<CartProvider>().addToCart(CartItemModal(
+                              id: generateProductId(),
+                              name: widget.productName,
+                              description: widget.productDesc,
+                              price: widget.amount,
+                              imgPath: widget.imagePath,
+                              quantity: 1));
+                          isSelectedCard = true;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Item added to cart"),
+                            ),
+                          );
+                        }
+                      });
                     },
-                    child: Text("Add To Cart")))
+                    child: Text(
+                        isSelectedCard ? "Remove from Cart" : "Add to Cart")))
           ],
         ),
       ),
     );
   }
 
-  String generateRandomId() {
-    return Random().nextInt(1000000).toString();
+  String generateProductId() {
+    return widget.productName.hashCode.toString();
   }
 
   selectColor() {

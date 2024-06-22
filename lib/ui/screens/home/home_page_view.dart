@@ -93,7 +93,7 @@ class _HomePageViewState extends State<HomePageView> {
                 ],
               ),
               latestProducts(),
-              hSpace(mHeight: 100)
+              hSpace()
             ],
           ),
         ),
@@ -192,61 +192,101 @@ class _HomePageViewState extends State<HomePageView> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 5,
                 crossAxisSpacing: 5,
-                childAspectRatio: 10 / 18),
+                childAspectRatio: 10 / 16),
             itemCount: data.length,
             itemBuilder: (BuildContext context, int index) {
               var itemData = data[index];
+              String productDataId = itemData.id;
 
-              return Card(
-                color: const Color(0xffffffff),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.favorite_outline)),
-                        ],
-                      ),
-                      Container(
-                        height: 140,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffe6e6e6),
-                            image: DecorationImage(
-                                image: NetworkImage("${itemData['image']}"),
-                                fit: BoxFit.cover),
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      hSpace(mHeight: 10),
-                      Flexible(
-                        child: Text(
-                          "hfhsdkjfhsdfksdfkdsjfsdkfhsdkfhdhfdskjfh dfsdfsdfsdfdsjfdsjfhdjkfhdkjfhsdkfhdkfdfdfdfjd ${itemData["name"]}",
-                        ),
-                      ),
-                      hSpace(mHeight: 10),
-                      Row(
-                        children: [
-                          const Text("⭐"),
-                          wSpace(mWidth: 5),
-                          Text(
-                            " (712 reviews)",
-                            style: textStyleFonts11(context,
-                                colors: const Color(0xff9a9998)),
+              bool isFavorite =
+                  context.watch<FavoriteProvider>().isFavorite(productDataId);
+
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetailsView(
+                          imagePath: itemData['image'],
+                          productName: itemData['name'],
+                          productDesc: itemData['description'],
+                          //  amount: itemData['amount'],
+                          amount: double.parse(itemData['amount'].toString())),
+                    ),
+                  );
+                },
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            if (isFavorite) {
+                              context
+                                  .read<FavoriteProvider>()
+                                  .removeFavorite(productDataId);
+                            } else {
+                              context
+                                  .read<FavoriteProvider>()
+                                  .addFavorite(productDataId, {
+                                'id': productDataId,
+                                'name': itemData['name'],
+                                'amount': itemData['amount'],
+                                'image': itemData['image'],
+                                'description': itemData['description'],
+                              });
+                            }
+                          },
+                          icon: Icon(
+                            isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: isFavorite ? Colors.red : null,
                           ),
-                        ],
-                      ),
-                      hSpace(mHeight: 10),
-                      Text(
-                        "₹${itemData["amount"]} /-",
-                        style: textStyleFonts18(context),
-                        maxLines: 1,
-                      )
-                    ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 120,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffe6e6e6),
+                                image: DecorationImage(
+                                  image: NetworkImage(itemData['image']),
+                                  fit: BoxFit.fill,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            hSpace(mHeight: 10),
+                            Text(
+                              itemData['name'],
+                              maxLines: 2,
+                            ),
+                            hSpace(mHeight: 10),
+                            Row(
+                              children: [
+                                const Text("⭐"),
+                                wSpace(mWidth: 5),
+                                Text(
+                                  "(712 reviews)",
+                                  style: textStyleFonts11(context,
+                                      colors: const Color(0xff9a9998)),
+                                ),
+                              ],
+                            ),
+                            hSpace(mHeight: 10),
+                            Text(
+                              "₹${itemData['amount']} /-",
+                              style: textStyleFonts18(context),
+                              maxLines: 1,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

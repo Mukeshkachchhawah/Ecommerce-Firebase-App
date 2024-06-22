@@ -1,51 +1,50 @@
-import 'package:e_commerece_clon/sqlite_database/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
 
 class CartProvider extends ChangeNotifier {
   List<CartItemModal> _cartItems = [];
 
-  CartProvider() {
-    _loadCartItemsFromDatabase();
-  }
-
   List<CartItemModal> get cartItems => _cartItems;
 
-  void addToCart(CartItemModal item) async {
-    _cartItems.add(item);
-    await DatabaseHelper().insertCartItem(item);
-    notifyListeners();
-  }
+  double get subtotal => _cartItems.fold(
+      0, (total, current) => total + current.price * current.quantity);
 
-  void removeFromCart(CartItemModal item) async {
-    _cartItems.remove(item);
-    await DatabaseHelper().removeCartItem(item.id);
-    notifyListeners();
-  }
-
-  void incrementQuantity(int index) async {
-    _cartItems[index].quantity++;
-    await DatabaseHelper().updateCartItemQuantity(_cartItems[index].id, _cartItems[index].quantity);
-    notifyListeners();
-  }
-
-  void decrementQuantity(int index) async {
-    if (_cartItems[index].quantity > 1) {
-      _cartItems[index].quantity--;
-      await DatabaseHelper().updateCartItemQuantity(_cartItems[index].id, _cartItems[index].quantity);
-      notifyListeners();
-    }
-  }
-
-  double get subtotal =>
-      _cartItems.fold(0, (sum, item) => sum + item.totalPrice);
-
-  double get discount => subtotal * 0.20;
+  double get discount => subtotal * 0.20; // Assuming a flat 20% discount
 
   double get total => subtotal - discount;
 
-  Future<void> _loadCartItemsFromDatabase() async {
-    _cartItems = await DatabaseHelper().getCartItems();
+  void addToCart(CartItemModal item) {
+    final index = _cartItems.indexWhere((element) => element.id == item.id);
+    if (index != -1) {
+      _cartItems[index].quantity += item.quantity;
+    } else {
+      _cartItems.add(item);
+    }
+    notifyListeners();
+  }
+
+  void removeFromCart(CartItemModal item) {
+    _cartItems.removeWhere((element) => element.id == item.id);
+    notifyListeners();
+  }
+
+  bool isInCart(String id) {
+    return _cartItems.any((element) => element.id == id);
+  }
+
+  void incrementQuantity(int index) {
+    _cartItems[index].quantity++;
+    notifyListeners();
+  }
+
+  void decrementQuantity(int index) {
+    if (_cartItems[index].quantity > 1) {
+      _cartItems[index].quantity--;
+    }
+    /* else {
+      _cartItems.removeAt(index);
+    } */
+    /// -1 decrement quantity
     notifyListeners();
   }
 }
