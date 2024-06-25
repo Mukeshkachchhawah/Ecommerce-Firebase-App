@@ -3,7 +3,7 @@ import 'package:another_flushbar/flushbar_route.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
-import 'color_code.dart';
+import '../contans/color_code.dart';
 
 //// show message in ui
 class Utils {

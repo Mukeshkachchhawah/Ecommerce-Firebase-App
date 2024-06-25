@@ -1,4 +1,5 @@
 import 'package:e_commerece_clon/compont/listtile.dart';
+import 'package:e_commerece_clon/contans/app_image.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -13,71 +14,89 @@ class _UserProfileViewState extends State<UserProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("User Profile"),
-      ),
-      body: Column(
-        children: [
-          Container(
-            height: 150,
-            width: double.infinity,
-            color: Colors.black,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                  ),
-                  wSpace(),
-                  Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Name : Mukesh Kachhawaha",
-                          style: textStyleFonts16(context,
-                              colors: const Color(0xffffffff)),
-                          maxLines: 1,
+        appBar: AppBar(
+          title: const Text("User Profile"),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 80,
+                  child: Card(
+                      color: Color(0xffffffff),
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 25,
+                              backgroundImage: AssetImage(AppImagePng.person),
+                            ),
+                            wSpace(mWidth: 10),
+                            Text(
+                              "Mukesh Kachhawaha",
+                              style: textStyleFonts18(context),
+                            )
+                          ],
                         ),
-                        hSpace(),
-                        Text(
-                          "Email : mukeshkachhawah49@gmail.com",
-                          style: textStyleFonts12(
-                            context,
-                            colors: const Color(0xffffffff),
-                          ),
-                          maxLines: 1,
-                        ),
-                        hSpace(),
-                        Text(
-                          "Phone : 7296826128",
-                          style: textStyleFonts12(context,
-                              colors: const Color(0xffffffff)),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                      )),
+                ),
+                hSpace(),
+                profileList(),
+              ],
             ),
           ),
-          hSpace(),
-          profileList()
-        ],
-      ),
-    );
+        ));
   }
 
   Widget profileList() {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            "Setting",
+            style: textStyleFonts16(context),
+          ),
+          hSpace(),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.notification_add_sharp),
+            title: Text(
+              'Push Notification',
+              style: textStyleFonts14(context),
+            ),
+            trailing: Switch(
+              value: false,
+              onChanged: (bool value) {},
+            ),
+            // onTap: () {},
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Icons.light_mode_outlined),
+            title: Text(
+              'Theme',
+              style: textStyleFonts14(context),
+            ),
+            trailing: Switch(
+              value: true,
+              onChanged: (bool value) {},
+            ),
+          ),
+          hSpace(),
+          Text(
+            "Other",
+            style: textStyleFonts16(context),
+          ),
+          hSpace(),
           CustomListTile(
             icons: const Icon(Icons.account_circle_outlined),
-            text: "My Profile",
+            text: "About Us",
             onTap: () {},
           ),
           CustomListTile(
@@ -87,7 +106,12 @@ class _UserProfileViewState extends State<UserProfileView> {
           ),
           CustomListTile(
             icons: const Icon(Icons.chat_outlined),
-            text: "My Chat",
+            text: "Terms & Condition",
+            onTap: () {},
+          ),
+          CustomListTile(
+            icons: const Icon(Icons.account_circle_outlined),
+            text: "Privacy Policy",
             onTap: () {},
           ),
           CustomListTile(
@@ -101,8 +125,23 @@ class _UserProfileViewState extends State<UserProfileView> {
             onTap: () {},
           ),
           CustomListTile(
-            icons: const Icon(Icons.more_vert),
+            icons: const Icon(Icons.star_outline),
             text: "Rate the App",
+            onTap: () {},
+          ),
+          CustomListTile(
+            icons: const Icon(Icons.share_outlined),
+            text: "Refer To Friend",
+            onTap: () {},
+          ),
+          CustomListTile(
+            icons: const Icon(Icons.language),
+            text: "Change Language",
+            onTap: () {},
+          ),
+          CustomListTile(
+            icons: const Icon(Icons.logout),
+            text: "Log Out",
             onTap: () {},
           )
         ],

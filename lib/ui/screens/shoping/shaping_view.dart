@@ -228,7 +228,7 @@ class CartItemWidget extends StatelessWidget {
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      // color: Colors.red,
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                           image: NetworkImage(item.imgPath ?? ''),
