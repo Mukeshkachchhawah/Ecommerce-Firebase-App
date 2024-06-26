@@ -1,4 +1,4 @@
-import 'package:e_commerece_clon/ui/screens/notification/notification.dart';
+import 'package:e_commerece_clon/ui/screens/profile/notification.dart';
 import 'package:e_commerece_clon/ui/screens/fovirute/favorite_product_view.dart';
 import 'package:e_commerece_clon/ui/screens/home/home_page_view.dart';
 import 'package:e_commerece_clon/ui/screens/shoping/shaping_view.dart';
