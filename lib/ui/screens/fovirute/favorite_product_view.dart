@@ -1,3 +1,4 @@
+import 'package:e_commerece_clon/contans/lottie_animation.dart';
 import 'package:e_commerece_clon/provider/product_like.dart';
 import 'package:e_commerece_clon/ui/screens/home/product_details_view.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
@@ -31,7 +32,7 @@ class _FavoriteProductsViewState extends State<FavoriteProductsView> {
                 child: SizedBox(
                     height: 200,
                     width: 200,
-                    child: Lottie.asset("assets/lottie/Animation.json")));
+                    child: Lottie.asset(LottieAnimation.dataNotFound)));
           }
 
           return GridView.builder(
