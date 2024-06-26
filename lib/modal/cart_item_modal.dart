@@ -3,18 +3,17 @@ class CartItemModal {
   String name;
   String description;
   double price;
+  String imgPath;
   int quantity;
-  String? imgPath;
 
-  CartItemModal(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.price,
-      required this.quantity,
-      this.imgPath});
-
-  double get totalPrice => price * quantity;
+  CartItemModal({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.imgPath,
+    required this.quantity,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -22,18 +21,19 @@ class CartItemModal {
       'name': name,
       'description': description,
       'price': price,
+      'imgPath': imgPath,
       'quantity': quantity,
-      'imgPath': imgPath
     };
   }
 
-  static CartItemModal fromMap(Map<String, dynamic> map) {
+  factory CartItemModal.fromMap(Map<String, dynamic> map) {
     return CartItemModal(
-        id: map['id'],
-        name: map['name'],
-        description: map['description'],
-        price: map['price'],
-        quantity: map['quantity'],
-        imgPath: map['imgPath']);
+      id: map['id'],
+      name: map['name'],
+      description: map['description'],
+      price: map['price'],
+      imgPath: map['imgPath'],
+      quantity: map['quantity'],
+    );
   }
 }
