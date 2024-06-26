@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:e_commerece_clon/modal/cart_item_modal.dart';
 
+import 'payment_gatewat.dart';
+
 class ShapingView extends StatelessWidget {
   const ShapingView({
     super.key,
@@ -119,7 +121,14 @@ class ShapingView extends StatelessWidget {
                         ),
                         hSpace(),
                         OutlinedButton(
-                            onPressed: () {}, child: Text("Add To CART"))
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentPage(),
+                                  ));
+                            },
+                            child: Text("Add To CART"))
                       ],
                     ),
                   ),
