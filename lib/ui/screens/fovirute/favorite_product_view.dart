@@ -2,6 +2,7 @@ import 'package:e_commerece_clon/provider/product_like.dart';
 import 'package:e_commerece_clon/ui/screens/home/product_details_view.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteProductsView extends StatefulWidget {
@@ -20,7 +21,6 @@ class _FavoriteProductsViewState extends State<FavoriteProductsView> {
           'Favorite Products',
           style: textStyleFonts16(context),
         ),
-        centerTitle: true,
       ),
       body: Consumer<FavoriteProvider>(
         builder: (context, favoriteProvider, child) {
@@ -28,10 +28,10 @@ class _FavoriteProductsViewState extends State<FavoriteProductsView> {
 
           if (favoriteProducts.isEmpty) {
             return Center(
-                child: Text(
-              'No favorite products found',
-              style: textStyleFonts14(context),
-            ));
+                child: SizedBox(
+                    height: 200,
+                    width: 200,
+                    child: Lottie.asset("assets/lottie/Animation.json")));
           }
 
           return GridView.builder(
