@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/theme_provider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -13,9 +15,10 @@ void main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => FavoriteProvider()),
       ChangeNotifierProvider(create: (_) => CartProvider()),
+      ChangeNotifierProvider(create: (_) => ThemeProvider(),)
       // Add more providers as needed
     ],
-    child: MyApp(), // Your main application widget
+    child: const MyApp(), // Your main application widget
   ));
 }
 
@@ -38,10 +41,12 @@ class MyApp extends StatelessWidget {
         systemNavigationBarColor: Colors.transparent,
       ),
     );
-    return MaterialApp(
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+      return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+      theme: themeProvider.themeValue? ThemeData.dark(): ThemeData.light(),
       home: const SplashView(),
     );
+    },);
   }
 }

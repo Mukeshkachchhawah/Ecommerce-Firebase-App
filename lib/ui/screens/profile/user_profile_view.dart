@@ -1,7 +1,9 @@
 import 'package:e_commerece_clon/compont/listtile.dart';
 import 'package:e_commerece_clon/contans/app_image.dart';
+import 'package:e_commerece_clon/provider/theme_provider.dart';
 import 'package:e_commerece_clon/utils/ui_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserProfileView extends StatefulWidget {
   const UserProfileView({super.key});
@@ -26,12 +28,12 @@ class _UserProfileViewState extends State<UserProfileView> {
                 SizedBox(
                   height: 80,
                   child: Card(
-                      color: Color(0xffffffff),
+                      color: const Color(0xffffffff),
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 25,
                               backgroundImage: AssetImage(AppImagePng.person),
                             ),
@@ -84,8 +86,11 @@ class _UserProfileViewState extends State<UserProfileView> {
               style: textStyleFonts14(context),
             ),
             trailing: Switch(
-              value: true,
-              onChanged: (bool value) {},
+              value: Provider.of<ThemeProvider>(context).themeValue,
+              onChanged: (bool value) {
+                Provider.of<ThemeProvider>(context, listen: false).themeValue =
+                    value;
+              },
             ),
           ),
           hSpace(),

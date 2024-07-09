@@ -23,7 +23,6 @@ class _HomePageViewState extends State<HomePageView> {
       appBar: AppBar(
         title: Text(
           "Home",
-          style: textStyleFonts16(context),
         ),
         centerTitle: true,
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.search))],
@@ -122,8 +121,9 @@ class _HomePageViewState extends State<HomePageView> {
                 children: [
                   Text(
                     "30% discount on all home decoration products",
-                    style: textStyleFonts20(context,
-                        colors: const Color(0xffffffff)),
+                    style: textStyleFonts20(
+                      context,
+                    ),
                   ),
                   hSpace(),
                   SizedBox(
@@ -136,8 +136,9 @@ class _HomePageViewState extends State<HomePageView> {
                           onPressed: () {},
                           child: Text(
                             "Get Now",
-                            style: textStyleFonts14(context,
-                                colors: const Color(0xffffffff)),
+                            style: textStyleFonts14(
+                              context,
+                            ),
                           )))
                 ],
               ),

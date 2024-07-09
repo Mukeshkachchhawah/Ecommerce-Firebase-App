@@ -21,6 +21,8 @@ class _SplashViewState extends State<SplashView> {
       () {
         Navigator.pushReplacement(
             context,
+
+            
             MaterialPageRoute(
               builder: (context) => const BottomBarView(),
             ));
@@ -30,7 +32,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.amberAccent,
       body: Center(
         child: Icon(

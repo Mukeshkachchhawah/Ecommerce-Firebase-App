@@ -76,8 +76,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                       hSpace(),
                       Text(
                         widget.productDesc,
-                        style: textStyleFonts14(context,
-                            colors: const Color(0xFFDBDBD8)),
+                        style: textStyleFonts14(
+                          context,
+                        ),
                       ),
                       hSpace(),
                       const Text("⭐⭐⭐⭐⭐"),

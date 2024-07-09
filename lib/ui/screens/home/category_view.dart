@@ -41,7 +41,7 @@ class CategoryView extends StatelessWidget {
                   Text(
                     "30% discount on all home decoration products",
                     style: textStyleFonts20(context,
-                        colors: const Color(0xffffffff)),
+                       ),
                   ),
                   hSpace(),
                   SizedBox(
@@ -54,8 +54,9 @@ class CategoryView extends StatelessWidget {
                           onPressed: () {},
                           child: Text(
                             "Get Now",
-                            style: textStyleFonts14(context,
-                                colors: const Color(0xffffffff)),
+                            style: textStyleFonts14(
+                              context,
+                            ),
                           )))
                 ],
               ),
