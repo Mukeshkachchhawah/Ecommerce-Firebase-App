@@ -17,6 +17,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => CartProvider()),
       ChangeNotifierProvider(create: (_) => ThemeProvider(),)
       // Add more providers as needed
+
     ],
     child: const MyApp(), // Your main application widget
   ));
